@@ -1,9 +1,10 @@
 import express from "express";
 import userRouter from "./routes/userRoute.js";
-import sequelize from "./config/connectDB.js"; // Adjust the path if needed
+import sequelize from "./config/connectDB.js";
+import UserModel from "./models/userModel.js"; // Import your User model
 
 const app = express();
-app.use(express.json()); // Middleware to parse JSON requests
+app.use(express.json());
 
 // Routes
 app.use("/api/users", userRouter);
@@ -18,9 +19,14 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {
     try {
         await sequelize.authenticate();
-        console.log("Database connected successfully!");
-        console.log(`Server running on http://localhost:${PORT}`);
+        console.log("✅ Database connected successfully!");
+
+        // Sync the database (creates table if not exists)
+        await sequelize.sync({ alter: true });  // Use { force: true } to reset the table (WARNING: it will delete existing data)
+        console.log("✅ All models were synchronized successfully.");
+
+        console.log(`🚀 Server running on http://localhost:${PORT}`);
     } catch (error) {
-        console.error("Database connection failed:", error);
+        console.error("❌ Database connection failed:", error);
     }
 });
