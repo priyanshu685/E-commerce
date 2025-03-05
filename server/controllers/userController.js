@@ -67,3 +67,18 @@ export async function logoutController(req, res) {
         res.status(500).json({ message: error.message });
     }
 }
+
+export async function getAllUsersController(req, res) {
+    try {
+        console.log("📢 Fetching all users...");
+
+        const users = await UserModel.findAll({ attributes: ["id", "name", "email", "status", "role"] });
+
+        console.log(`✅ Found ${users.length} users`);
+        res.json({ success: true, users });
+
+    } catch (error) {
+        console.error("🚨 Fetch Users Error:", error.message);
+        res.status(500).json({ message: error.message });
+    }
+}

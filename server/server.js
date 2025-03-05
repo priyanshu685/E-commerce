@@ -20,9 +20,7 @@ app.listen(PORT, async () => {
     try {
         await sequelize.authenticate();
         console.log("✅ Database connected successfully!");
-
-        // Sync the database (creates table if not exists)
-        await sequelize.sync({ alter: true });  // Use { force: true } to reset the table (WARNING: it will delete existing data)
+        await sequelize.sync({ alter: true });
         console.log("✅ All models were synchronized successfully.");
 
         console.log(`🚀 Server running on http://localhost:${PORT}`);
