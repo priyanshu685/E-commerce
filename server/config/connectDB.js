@@ -8,7 +8,7 @@ const sequelize = new Sequelize('EComDB', 'root', 'Raghav@2004', {
 });
 
 sequelize.authenticate()
-    .then(() => console.log('✅ Database connected...'))
-    .catch(err => console.error('❌ Connection error:', err));
+    .then(() => console.log('Database connected...'))
+    .catch(err => console.error('Connection error:', err));
 
 export default sequelize;
