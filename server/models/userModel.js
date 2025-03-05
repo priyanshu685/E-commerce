@@ -49,7 +49,7 @@ const User = sequelize.define(
         },
     },
     {
-        timestamps: true, // Adds createdAt & updatedAt automatically
+        timestamps: true,
         tableName: "users",
     }
 );
