@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+dotenv.config();
+// console.log("JWT_SECRET from env:", process.env.JWT_SECRET);
+
 import express from "express";
 import userRouter from "./routes/userRoute.js";
 import sequelize from "./config/connectDB.js";

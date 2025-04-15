@@ -1,57 +1,35 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/connectDB.js";
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/connectDB.js';
 
-const User = sequelize.define(
-    "User",
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-        },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        avatar: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: "",
-        },
-        mobile: {
-            type: DataTypes.BIGINT,
-            allowNull: true,
-            defaultValue: null,
-        },
-        last_login_date: {
-            type: DataTypes.DATE,
-            allowNull: true,
-            defaultValue: null,
-        },
-        status: {
-            type: DataTypes.ENUM("Active", "Inactive", "Suspended"),
-            allowNull: false,
-            defaultValue: "Active",
-        },
-        role: {
-            type: DataTypes.ENUM("ADMIN", "USER"),
-            allowNull: false,
-            defaultValue: "USER",
-        },
+const User = sequelize.define('user', {
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    {
-        timestamps: true,
-        tableName: "users",
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    cartData: {
+        type: DataTypes.JSON,
+        defaultValue: {}
+    },
+    status: {
+        type: DataTypes.STRING,
+        defaultValue: 'active'
+    },
+    role: {
+        type: DataTypes.STRING,
+        defaultValue: 'user'
     }
-);
+}, {
+    freezeTableName: true,
+    timestamps: false
+});
 
 export default User;
